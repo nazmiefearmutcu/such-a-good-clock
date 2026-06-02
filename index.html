@@ -1,76 +1,144 @@
 <!doctype html>
-<html lang="en" data-theme="matrix" data-layout="split" data-fx="on">
+<html lang="en" data-theme="matrix" data-layout="split" data-fx="on" data-face="digital">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#08141f" />
     <title>Such A Good Clock</title>
-
-    <meta name="description" content="Themed fullscreen clock, alarms, countdown timers, and six cinematic preset themes. Works offline as a PWA, and as a native desktop app." />
-
-    <!-- Open Graph (link previews on Slack, Discord, Signal, iMessage, etc.) -->
+    <meta name="description" content="10 cinematic themes, analog clock face, stopwatch, world clock, pomodoro timer. PWA + native desktop." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Such A Good Clock" />
-    <meta property="og:description" content="Themed fullscreen clock, alarms, countdown timers, and six cinematic preset themes. Works offline as a PWA, and as a native desktop app." />
+    <meta property="og:description" content="10 cinematic themes, analog clock face, stopwatch, world clock, pomodoro timer. PWA + native desktop." />
     <meta property="og:url" content="https://nazmiefearmutcu.github.io/such-a-good-clock/" />
     <meta property="og:image" content="https://nazmiefearmutcu.github.io/such-a-good-clock/docs/screenshots/theme-matrix.png" />
-    <meta property="og:image:width" content="1440" />
-    <meta property="og:image:height" content="900" />
-    <meta property="og:image:alt" content="Such A Good Clock — Matrix theme showing live time with the quote 'Follow the white rabbit.'" />
-
-    <!-- Twitter / X large image card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Such A Good Clock" />
-    <meta name="twitter:description" content="Themed fullscreen clock, alarms, countdown timers, and six cinematic preset themes. Works offline as a PWA, and as a native desktop app." />
+    <meta name="twitter:description" content="10 cinematic themes, analog clock face, stopwatch, world clock, pomodoro timer. PWA + native desktop." />
     <meta name="twitter:image" content="https://nazmiefearmutcu.github.io/such-a-good-clock/docs/screenshots/theme-matrix.png" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308141f'/%3E%3Cpath d='M32 12v22l14 8' stroke='%2339ff88' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='32' r='22' stroke='%23d6f7ff' stroke-width='4' fill='none'/%3E%3C/svg%3E" />
     <link rel="apple-touch-icon" href="icons/such-a-good-clock-192.png" />
     <link rel="manifest" href="manifest.webmanifest" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=JetBrains+Mono:wght@300;400;600&family=Big+Shoulders+Display:wght@500;700;800;900&family=Saira+Condensed:wght@400;500;600;700&family=Saira:wght@200;300;400;600&family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Lilita+One&family=Fredoka:wght@400;500;600;700&family=Bowlby+One&family=Rubik+Mono+One&display=swap" rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=JetBrains+Mono:wght@300;400;600&family=Big+Shoulders+Display:wght@500;700;800;900&family=Saira+Condensed:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Exo+2:wght@300;400;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Background layers -->
     <canvas id="bgFx" class="bg-fx" aria-hidden="true"></canvas>
     <div class="bg-overlay" aria-hidden="true"></div>
     <div class="bg-scanlines" aria-hidden="true"></div>
     <div class="bg-vignette" aria-hidden="true"></div>
+    <div class="bg-grain" aria-hidden="true"></div>
 
     <div class="app-shell">
-      <header class="topbar">
-        <a class="brand-home" id="brandHome" data-testid="brand-home" href="#clock" aria-label="Go to Clock home">
+      <header class="topbar" id="topbar">
+        <a class="brand-home" id="brandHome" href="#clock" aria-label="Go to Clock home">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.2" />
-              <path d="M16 7v9l6 3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+              <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M16 7v9l6 3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
             </svg>
           </span>
-          <h1>Such A Good Clock</h1>
+          <span class="brand-text">Such A Good Clock</span>
         </a>
+
         <nav class="tabs" aria-label="Main navigation">
           <button class="tab active" data-tab-target="clock" data-testid="tab-clock">Clock</button>
           <button class="tab" data-tab-target="alarms" data-testid="tab-alarms">Alarms</button>
           <button class="tab" data-tab-target="timer" data-testid="tab-timer">Timer</button>
+          <button class="tab" data-tab-target="stopwatch" data-testid="tab-stopwatch">Stopwatch</button>
+          <button class="tab" data-tab-target="world" data-testid="tab-world">World</button>
           <button class="tab" data-tab-target="settings" data-testid="tab-settings">Settings</button>
         </nav>
+
+        <div class="topbar-actions">
+          <button class="icon-btn" id="fullscreenBtn" title="Fullscreen (F)" aria-label="Toggle fullscreen">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 7V3h4M17 7V3h-4M3 13v4h4M17 13v4h-4"/>
+            </svg>
+          </button>
+          <button class="icon-btn" id="keyboardShortcutsBtn" title="Keyboard shortcuts (?)" aria-label="Show keyboard shortcuts">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="5" width="16" height="10" rx="2"/>
+              <path d="M5 9h2M9 9h2M13 9h2M7 12h6"/>
+            </svg>
+          </button>
+        </div>
       </header>
 
       <main>
+        <!-- ===== CLOCK PAGE ===== -->
         <section id="clock" class="page active" aria-labelledby="clock-heading">
           <div class="clock-panel">
-            <div class="clock-greeting">
+            <div class="clock-greeting" id="greetingArea">
               <p class="eyebrow" id="greetingEyebrow">Good evening</p>
-              <h2 id="greetingName" class="greeting-name">Hello there.</h2>
+              <p class="greeting-name" id="greetingName" role="button" tabindex="0" title="Click for next line">Follow the white rabbit.</p>
             </div>
 
-            <h2 id="clock-heading" class="sr-only">Digital clock</h2>
-            <div id="digitalClock" class="digital-clock" data-testid="digital-clock">
-              <span class="ck-hh">--</span><span class="ck-sep">:</span><span class="ck-mm">--</span><span class="ck-ss-wrap"><span class="ck-sep ck-sep-s">:</span><span class="ck-ss">--</span></span>
+            <h2 id="clock-heading" class="sr-only">Clock</h2>
+
+            <!-- Digital face -->
+            <div id="digitalClock" class="digital-clock" data-testid="digital-clock" aria-live="off">
+              <span class="ck-hh">--</span><span class="ck-sep ck-sep-colon">:</span><span class="ck-mm">--</span><span class="ck-ss-wrap"><span class="ck-sep ck-sep-s">:</span><span class="ck-ss">--</span></span><span class="ck-suffix"></span>
             </div>
 
+            <!-- Analog face (SVG) -->
+            <div id="analogClock" class="analog-clock" aria-hidden="true">
+              <svg viewBox="0 0 200 200" class="analog-svg">
+                <!-- Outer rim -->
+                <circle cx="100" cy="100" r="96" class="ac-rim"/>
+                <!-- Face -->
+                <circle cx="100" cy="100" r="90" class="ac-face"/>
+                <!-- Hour markers (12 major) injected by JS via <g id="acMarkers"> -->
+                <g id="acMarkers"></g>
+                <!-- Hands -->
+                <line id="acHourHand" x1="100" y1="100" x2="100" y2="48" stroke-linecap="round" class="ac-hour-hand"/>
+                <line id="acMinHand"  x1="100" y1="100" x2="100" y2="30" stroke-linecap="round" class="ac-min-hand"/>
+                <line id="acSecHand"  x1="100" y1="112" x2="100" y2="22" stroke-linecap="round" class="ac-sec-hand"/>
+                <!-- Center dot -->
+                <circle cx="100" cy="100" r="5" class="ac-center-dot"/>
+                <circle cx="100" cy="100" r="2.5" class="ac-center-inner"/>
+              </svg>
+            </div>
+
+            <!-- Flip face -->
+            <div id="flipClock" class="flip-clock" aria-hidden="true">
+              <div class="flip-group" id="flipHH">
+                <div class="flip-card" id="flipH1">
+                  <div class="flip-top"><span>0</span></div>
+                  <div class="flip-bottom"><span>0</span></div>
+                </div>
+                <div class="flip-card" id="flipH2">
+                  <div class="flip-top"><span>0</span></div>
+                  <div class="flip-bottom"><span>0</span></div>
+                </div>
+              </div>
+              <div class="flip-colon">:</div>
+              <div class="flip-group" id="flipMM">
+                <div class="flip-card" id="flipM1">
+                  <div class="flip-top"><span>0</span></div>
+                  <div class="flip-bottom"><span>0</span></div>
+                </div>
+                <div class="flip-card" id="flipM2">
+                  <div class="flip-top"><span>0</span></div>
+                  <div class="flip-bottom"><span>0</span></div>
+                </div>
+              </div>
+              <div class="flip-colon flip-sec-colon">:</div>
+              <div class="flip-group flip-sec-group" id="flipSS">
+                <div class="flip-card" id="flipS1">
+                  <div class="flip-top"><span>0</span></div>
+                  <div class="flip-bottom"><span>0</span></div>
+                </div>
+                <div class="flip-card" id="flipS2">
+                  <div class="flip-top"><span>0</span></div>
+                  <div class="flip-bottom"><span>0</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clock footer info strip -->
             <div class="clock-foot">
               <div class="clock-foot-cell">
                 <span class="meta-label">Today</span>
@@ -92,13 +160,14 @@
           </div>
         </section>
 
+        <!-- ===== ALARMS PAGE ===== -->
         <section id="alarms" class="page" aria-labelledby="alarms-heading">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Daily and one-time</p>
+              <p class="eyebrow">Daily &amp; one-time</p>
               <h2 id="alarms-heading">Alarms</h2>
             </div>
-            <button class="primary" id="unlockAudio" data-testid="unlock-audio">Enable audio</button>
+            <button class="btn-secondary" id="unlockAudio" data-testid="unlock-audio">Enable audio</button>
           </div>
 
           <form id="alarmForm" class="form-grid">
@@ -108,7 +177,7 @@
             </label>
             <label>
               <span>Label</span>
-              <input id="alarmLabel" type="text" maxlength="40" value="Alarm" />
+              <input id="alarmLabel" type="text" maxlength="40" value="Alarm" placeholder="Wake up!" />
             </label>
             <label>
               <span>Sound</span>
@@ -116,61 +185,185 @@
                 <option value="bell">Strong bell</option>
                 <option value="pulse">Soft pulse</option>
                 <option value="triple">Triple chime</option>
+                <option value="digital">Digital beep</option>
+                <option value="cosmic">Cosmic tone</option>
+                <option value="gentle">Gentle rise</option>
               </select>
             </label>
-            <button class="primary" type="submit" data-testid="add-alarm">Add alarm</button>
+            <label>
+              <span>Repeat</span>
+              <select id="alarmRepeat">
+                <option value="daily">Every day</option>
+                <option value="weekdays">Weekdays</option>
+                <option value="weekends">Weekends</option>
+                <option value="once">Once</option>
+              </select>
+            </label>
+            <div class="form-actions">
+              <button class="btn-primary" type="submit" data-testid="add-alarm">Add alarm</button>
+            </div>
           </form>
 
           <div class="quick-row" aria-label="Quick alarm actions">
-            <button id="quickOne" data-testid="quick-one">+1 min alarm</button>
-            <button id="quickTen" data-testid="quick-ten">+10 min alarm</button>
-            <button id="quickTestAlarm" data-testid="quick-test-alarm">Test alarm +5 sec</button>
-            <button id="testAlarmSound" data-testid="test-alarm-sound">Try alarm sound</button>
+            <button id="quickOne" data-testid="quick-one">+1 min</button>
+            <button id="quickTen" data-testid="quick-ten">+10 min</button>
+            <button id="quickThirty">+30 min</button>
+            <button id="quickTestAlarm" data-testid="quick-test-alarm">+5 sec test</button>
+            <button id="testAlarmSound" data-testid="test-alarm-sound">Try sound</button>
           </div>
 
           <div id="alarmList" class="list" data-testid="alarm-list"></div>
         </section>
 
+        <!-- ===== TIMER PAGE ===== -->
         <section id="timer" class="page" aria-labelledby="timer-heading">
           <div class="section-head">
             <div>
               <p class="eyebrow">Countdown</p>
               <h2 id="timer-heading">Timer</h2>
             </div>
-            <button id="testTimerSound" data-testid="test-timer-sound">Try timer sound</button>
+            <div class="quick-row" style="margin:0">
+              <button id="testTimerSound" data-testid="test-timer-sound">Try sound</button>
+              <button id="pomodoroToggle" class="toggle-btn" data-testid="pomodoro-toggle" aria-pressed="false">Pomodoro</button>
+            </div>
           </div>
 
-          <div class="timer-card">
-            <div id="timerDisplay" class="timer-display" data-testid="timer-display">00:00</div>
-            <div class="timer-progress" aria-hidden="true">
-              <div id="timerProgressBar" class="timer-progress-bar"></div>
+          <!-- Circular SVG ring + display -->
+          <div class="timer-ring-wrap">
+            <svg id="timerRingSvg" viewBox="0 0 240 240" class="timer-ring-svg" aria-hidden="true">
+              <circle class="ring-track" cx="120" cy="120" r="108"/>
+              <circle id="timerRingArc" class="ring-progress" cx="120" cy="120" r="108"
+                stroke-dasharray="678.58" stroke-dashoffset="0"
+                transform="rotate(-90 120 120)"/>
+            </svg>
+            <div class="timer-ring-center">
+              <div id="timerDisplay" class="timer-display" data-testid="timer-display">00:00</div>
+              <div id="timerPomodoroLabel" class="timer-pomodoro-label" hidden>Work</div>
             </div>
-            <div class="timer-inputs">
+          </div>
+
+          <!-- Pomodoro session dots -->
+          <div id="pomodoroSessions" class="pomodoro-sessions" hidden>
+            <span class="pomodoro-dot" data-session="1"></span>
+            <span class="pomodoro-dot" data-session="2"></span>
+            <span class="pomodoro-dot" data-session="3"></span>
+            <span class="pomodoro-dot" data-session="4"></span>
+          </div>
+
+          <div class="timer-inputs" id="timerInputs">
+            <label>
+              <span>Hours</span>
+              <input id="timerHours" type="number" min="0" max="23" value="0" />
+            </label>
+            <label>
+              <span>Minutes</span>
+              <input id="timerMinutes" type="number" min="0" max="59" value="1" />
+            </label>
+            <label>
+              <span>Seconds</span>
+              <input id="timerSeconds" type="number" min="0" max="59" value="0" />
+            </label>
+          </div>
+
+          <div class="quick-row" id="timerPresets">
+            <button data-timer-preset="60">1 min</button>
+            <button data-timer-preset="300">5 min</button>
+            <button data-timer-preset="600">10 min</button>
+            <button data-timer-preset="1500">25 min</button>
+            <button data-timer-preset="2700">45 min</button>
+            <button data-timer-preset="3600">1 hr</button>
+          </div>
+
+          <div class="timer-actions">
+            <button class="btn-primary" id="startTimer" data-testid="start-timer">Start</button>
+            <button id="pauseTimer" data-testid="pause-timer">Pause</button>
+            <button id="resetTimer" data-testid="reset-timer">Reset</button>
+            <button id="startThreeSecondTimer" data-testid="start-3s-timer" class="muted-btn">3 sec test</button>
+          </div>
+
+          <!-- Pomodoro settings (shown when pomodoro mode on) -->
+          <div id="pomodoroSettings" class="pomodoro-settings" hidden>
+            <div class="settings-grid">
               <label>
-                <span>Minutes</span>
-                <input id="timerMinutes" type="number" min="0" max="999" value="1" />
+                <span>Work (min)</span>
+                <input id="pomodoroWork" type="number" min="1" max="60" value="25" />
               </label>
               <label>
-                <span>Seconds</span>
-                <input id="timerSeconds" type="number" min="0" max="59" value="0" />
+                <span>Short break (min)</span>
+                <input id="pomodoroBreak" type="number" min="1" max="30" value="5" />
               </label>
-            </div>
-            <div class="quick-row">
-              <button data-timer-preset="60">1 min</button>
-              <button data-timer-preset="300">5 min</button>
-              <button data-timer-preset="600">10 min</button>
-              <button data-timer-preset="1500">25 min</button>
-              <button data-timer-preset="2700">45 min</button>
-            </div>
-            <div class="timer-actions">
-              <button class="primary" id="startTimer" data-testid="start-timer">Start</button>
-              <button id="pauseTimer" data-testid="pause-timer">Pause</button>
-              <button id="resetTimer" data-testid="reset-timer">Reset</button>
-              <button id="startThreeSecondTimer" data-testid="start-3s-timer">3 sec test timer</button>
+              <label>
+                <span>Long break (min)</span>
+                <input id="pomodoroLongBreak" type="number" min="5" max="60" value="15" />
+              </label>
+              <label>
+                <span>Sessions before long break</span>
+                <input id="pomodoroRounds" type="number" min="2" max="8" value="4" />
+              </label>
             </div>
           </div>
         </section>
 
+        <!-- ===== STOPWATCH PAGE (NEW) ===== -->
+        <section id="stopwatch" class="page" aria-labelledby="sw-heading">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Measure time</p>
+              <h2 id="sw-heading">Stopwatch</h2>
+            </div>
+            <button id="exportLaps" class="btn-secondary" hidden>Export laps</button>
+          </div>
+
+          <div class="stopwatch-display-wrap">
+            <div class="stopwatch-display" data-testid="stopwatch-display">
+              <span id="swHours" class="sw-hours hidden">00:</span><span id="swMin">00</span>:<span id="swSec">00</span>.<span id="swCs" class="sw-cs">00</span>
+            </div>
+            <div id="swSplitDelta" class="sw-split-delta" hidden></div>
+          </div>
+
+          <div class="stopwatch-actions">
+            <button class="btn-primary" id="startStopwatch" data-testid="start-stopwatch">Start</button>
+            <button id="lapStopwatch" data-testid="lap-stopwatch" disabled>Lap</button>
+            <button id="resetStopwatch" data-testid="reset-stopwatch">Reset</button>
+          </div>
+
+          <div id="lapList" class="lap-list" data-testid="lap-list"></div>
+        </section>
+
+        <!-- ===== WORLD CLOCK PAGE (NEW) ===== -->
+        <section id="world" class="page" aria-labelledby="world-heading">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Around the globe</p>
+              <h2 id="world-heading">World Clock</h2>
+            </div>
+            <button class="btn-secondary" id="addWorldClock" data-testid="add-world-clock">+ Add clock</button>
+          </div>
+
+          <!-- Add clock panel (hidden by default) -->
+          <div id="worldAddPanel" class="world-add-panel" hidden>
+            <form id="worldAddForm" class="form-grid">
+              <label class="col-2">
+                <span>Timezone</span>
+                <select id="worldTimezone" data-testid="world-timezone"></select>
+              </label>
+              <label>
+                <span>Label (optional)</span>
+                <input id="worldLabel" type="text" maxlength="30" placeholder="e.g. New York" />
+              </label>
+              <div class="form-actions">
+                <button class="btn-primary" type="submit">Add</button>
+                <button type="button" id="cancelWorldAdd">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="worldClockGrid" class="world-clock-grid" data-testid="world-clock-grid"></div>
+
+          <p class="empty-hint" id="worldEmptyHint">Add a timezone to track time around the world.</p>
+        </section>
+
+        <!-- ===== SETTINGS PAGE ===== -->
         <section id="settings" class="page" aria-labelledby="settings-heading">
           <div class="section-head">
             <div>
@@ -180,20 +373,21 @@
           </div>
 
           <div class="settings-stack">
+            <!-- Personalize -->
             <div class="setting-group">
               <div class="setting-group-head">
                 <p class="eyebrow">Personalize</p>
-                <h3>Who's using this clock?</h3>
+                <h3>Identity</h3>
               </div>
               <div class="settings-grid">
                 <label class="col-2">
                   <span>Your name</span>
-                  <input id="displayName" type="text" maxlength="32" placeholder="e.g. Aylin" />
+                  <input id="displayName" type="text" maxlength="32" placeholder="e.g. Nazmi" />
                 </label>
                 <label>
                   <span>Greeting style</span>
                   <select id="greetingStyle">
-                    <option value="time">Time of day</option>
+                    <option value="time">Time of day + quote</option>
                     <option value="static">Just my name</option>
                     <option value="motto">Custom motto</option>
                     <option value="off">No greeting</option>
@@ -201,39 +395,41 @@
                 </label>
                 <label>
                   <span>Custom motto</span>
-                  <input id="customMotto" type="text" maxlength="60" placeholder="Stay focused." />
+                  <input id="customMotto" type="text" maxlength="80" placeholder="Stay focused." />
                 </label>
               </div>
             </div>
 
+            <!-- Theme picker -->
             <div class="setting-group">
               <div class="setting-group-head">
                 <p class="eyebrow">Look</p>
-                <h3>Theme &amp; presentation</h3>
+                <h3>Theme</h3>
               </div>
 
               <div class="theme-picker" role="radiogroup" aria-label="Theme">
-                <button type="button" class="theme-card" data-theme-pick="matrix" data-testid="theme-card-matrix">
+                <!-- Original 6 themes -->
+                <button type="button" class="theme-card" data-theme-pick="matrix" data-testid="theme-card-matrix" aria-pressed="true">
                   <span class="theme-card-preview tcp-matrix">
                     <span class="tcp-rain"></span>
                     <span class="tcp-clock">23:47</span>
                   </span>
                   <span class="theme-card-meta">
                     <strong>Matrix</strong>
-                    <small>CRT terminal, digital rain</small>
+                    <small>CRT terminal · digital rain</small>
                   </span>
                 </button>
-                <button type="button" class="theme-card" data-theme-pick="bladerunner" data-testid="theme-card-2049">
+                <button type="button" class="theme-card" data-theme-pick="bladerunner" aria-pressed="false">
                   <span class="theme-card-preview tcp-bladerunner">
                     <span class="tcp-dust"></span>
                     <span class="tcp-clock">23:47</span>
                   </span>
                   <span class="theme-card-meta">
                     <strong>2049</strong>
-                    <small>Dust storm, neon haze</small>
+                    <small>Dust storm · neon haze</small>
                   </span>
                 </button>
-                <button type="button" class="theme-card" data-theme-pick="alien" data-testid="theme-card-alien">
+                <button type="button" class="theme-card" data-theme-pick="alien" aria-pressed="false">
                   <span class="theme-card-preview tcp-alien">
                     <span class="tcp-scan"></span>
                     <span class="tcp-clock">23:47</span>
@@ -243,7 +439,68 @@
                     <small>Nostromo amber CRT</small>
                   </span>
                 </button>
-                <button type="button" class="theme-card" data-theme-pick="pinkie" data-testid="theme-card-pinkie">
+                <button type="button" class="theme-card" data-theme-pick="interstellar" aria-pressed="false">
+                  <span class="theme-card-preview tcp-interstellar">
+                    <span class="tcp-stars"></span>
+                    <span class="tcp-clock">23:47</span>
+                  </span>
+                  <span class="theme-card-meta">
+                    <strong>Interstellar</strong>
+                    <small>Deep space · Gargantua</small>
+                  </span>
+                </button>
+                <!-- New 4 themes -->
+                <button type="button" class="theme-card theme-card-new" data-theme-pick="cyberpunk" aria-pressed="false">
+                  <span class="theme-card-preview tcp-cyberpunk">
+                    <span class="tcp-grid"></span>
+                    <span class="tcp-clock">23:47</span>
+                  </span>
+                  <span class="theme-card-meta">
+                    <strong>Cyberpunk</strong>
+                    <small>Neon grid · chrome glitch</small>
+                  </span>
+                </button>
+                <button type="button" class="theme-card theme-card-new" data-theme-pick="dune" aria-pressed="false">
+                  <span class="theme-card-preview tcp-dune">
+                    <span class="tcp-sand"></span>
+                    <span class="tcp-clock">23:47</span>
+                  </span>
+                  <span class="theme-card-meta">
+                    <strong>Dune</strong>
+                    <small>Desert sand · golden light</small>
+                  </span>
+                </button>
+                <button type="button" class="theme-card theme-card-new" data-theme-pick="synthwave" aria-pressed="false">
+                  <span class="theme-card-preview tcp-synthwave">
+                    <span class="tcp-retrogrid"></span>
+                    <span class="tcp-clock">23:47</span>
+                  </span>
+                  <span class="theme-card-meta">
+                    <strong>Synthwave</strong>
+                    <small>Retro 80s · neon sunset</small>
+                  </span>
+                </button>
+                <button type="button" class="theme-card theme-card-new" data-theme-pick="mandalorian" aria-pressed="false">
+                  <span class="theme-card-preview tcp-mandalorian">
+                    <span class="tcp-stars"></span>
+                    <span class="tcp-clock">23:47</span>
+                  </span>
+                  <span class="theme-card-meta">
+                    <strong>Mandalorian</strong>
+                    <small>Beskar silver · deep space</small>
+                  </span>
+                </button>
+                <button type="button" class="theme-card theme-card-new" data-theme-pick="oppenheimer" aria-pressed="false">
+                  <span class="theme-card-preview tcp-oppenheimer">
+                    <span class="tcp-blast"></span>
+                    <span class="tcp-clock">23:47</span>
+                  </span>
+                  <span class="theme-card-meta">
+                    <strong>Trinity</strong>
+                    <small>Nuclear white · sepia burn</small>
+                  </span>
+                </button>
+                <button type="button" class="theme-card" data-theme-pick="pinkie" aria-pressed="false">
                   <span class="theme-card-preview tcp-pinkie">
                     <span class="tcp-confetti"></span>
                     <span class="tcp-clock">23:47</span>
@@ -253,7 +510,7 @@
                     <small>Confetti &amp; balloons</small>
                   </span>
                 </button>
-                <button type="button" class="theme-card" data-theme-pick="rainbow" data-testid="theme-card-rainbow">
+                <button type="button" class="theme-card" data-theme-pick="rainbow" aria-pressed="false">
                   <span class="theme-card-preview tcp-rainbow">
                     <span class="tcp-streaks"></span>
                     <span class="tcp-clock">23:47</span>
@@ -263,19 +520,15 @@
                     <small>Sky &amp; speed streaks</small>
                   </span>
                 </button>
-                <button type="button" class="theme-card" data-theme-pick="interstellar" data-testid="theme-card-interstellar">
-                  <span class="theme-card-preview tcp-interstellar">
-                    <span class="tcp-stars"></span>
-                    <span class="tcp-disc"></span>
-                    <span class="tcp-clock">23:47</span>
-                  </span>
-                  <span class="theme-card-meta">
-                    <strong>Interstellar</strong>
-                    <small>Deep space, Gargantua glow</small>
-                  </span>
-                </button>
               </div>
+            </div>
 
+            <!-- Presentation -->
+            <div class="setting-group">
+              <div class="setting-group-head">
+                <p class="eyebrow">Presentation</p>
+                <h3>Layout &amp; colors</h3>
+              </div>
               <div class="settings-grid">
                 <label>
                   <span>Clock layout</span>
@@ -285,28 +538,45 @@
                     <button type="button" data-seg-val="minimal">Minimal</button>
                   </div>
                 </label>
+                <div class="col-2 face-setting">
+                  <span class="field-label">Clock face</span>
+                  <div class="face-selector" role="radiogroup" aria-label="Clock face">
+                    <button type="button" class="face-btn active" data-face="digital" aria-pressed="true">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M7 10h2v4H7zM11 10h2v4h-2zM15 10h2v4h-2z" fill="var(--bg)"/></svg>
+                      <span>Digital</span>
+                    </button>
+                    <button type="button" class="face-btn" data-face="analog" aria-pressed="false">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                      <span>Analog</span>
+                    </button>
+                    <button type="button" class="face-btn" data-face="flip" aria-pressed="false">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="6" width="7" height="12" rx="1.5"/><rect x="14" y="6" width="7" height="12" rx="1.5"/></svg>
+                      <span>Flip</span>
+                    </button>
+                  </div>
+                </div>
                 <label>
-                  <span>Accent</span>
+                  <span>Accent color</span>
                   <div class="swatches" id="accentSwatches" role="radiogroup" aria-label="Accent color"></div>
                 </label>
                 <label class="check-line">
                   <input id="clockCustomColorToggle" type="checkbox" data-testid="clock-custom-colors-toggle" />
                   <span>Custom clock colors</span>
                 </label>
-                <div class="col-2 color-setting">
+                <div class="col-2 color-setting" id="customColorPickers">
                   <span class="field-label">Clock color palette</span>
-                  <div class="clock-color-palette" aria-label="Clock color palette">
+                  <div class="clock-color-palette">
                     <label class="color-picker">
                       <span>Top</span>
-                      <input id="clockColor1" type="color" value="#ffffff" data-testid="clock-color-1" />
+                      <input id="clockColor1" type="color" value="#ffffff" />
                     </label>
                     <label class="color-picker">
                       <span>Middle</span>
-                      <input id="clockColor2" type="color" value="#e8b76f" data-testid="clock-color-2" />
+                      <input id="clockColor2" type="color" value="#e8b76f" />
                     </label>
                     <label class="color-picker">
                       <span>Bottom</span>
-                      <input id="clockColor3" type="color" value="#8ec5ff" data-testid="clock-color-3" />
+                      <input id="clockColor3" type="color" value="#8ec5ff" />
                     </label>
                   </div>
                 </div>
@@ -316,15 +586,29 @@
                 </label>
                 <label class="check-line">
                   <input id="scanlinesToggle" type="checkbox" />
-                  <span>CRT scanlines (Matrix)</span>
+                  <span>CRT scanlines</span>
                 </label>
                 <label class="check-line">
-                  <input id="topbarAutoHideToggle" type="checkbox" data-testid="topbar-autohide-toggle" />
-                  <span>Auto-hide top tabs</span>
+                  <input id="grainToggle" type="checkbox" />
+                  <span>Film grain overlay</span>
+                </label>
+                <label class="check-line">
+                  <input id="topbarAutoHideToggle" type="checkbox" />
+                  <span>Auto-hide top bar</span>
+                </label>
+                <label>
+                  <span>Font scale</span>
+                  <div class="seg" data-seg="fontScale" role="radiogroup" aria-label="Font scale">
+                    <button type="button" data-seg-val="s">S</button>
+                    <button type="button" data-seg-val="m">M</button>
+                    <button type="button" data-seg-val="l">L</button>
+                    <button type="button" data-seg-val="xl">XL</button>
+                  </div>
                 </label>
               </div>
             </div>
 
+            <!-- Clock display options -->
             <div class="setting-group">
               <div class="setting-group-head">
                 <p class="eyebrow">Clock</p>
@@ -346,15 +630,16 @@
                 <label>
                   <span>Date format</span>
                   <select id="dateFormat">
-                    <option value="long">Monday, 19 May 2026</option>
-                    <option value="short">Mon, 19 May</option>
-                    <option value="iso">2026-05-19</option>
+                    <option value="long">Monday, 2 June 2026</option>
+                    <option value="short">Mon, 2 Jun</option>
+                    <option value="iso">2026-06-02</option>
                     <option value="off">Hide date</option>
                   </select>
                 </label>
               </div>
             </div>
 
+            <!-- Audio -->
             <div class="setting-group">
               <div class="setting-group-head">
                 <p class="eyebrow">Sound</p>
@@ -367,6 +652,9 @@
                     <option value="bell">Strong bell</option>
                     <option value="pulse">Soft pulse</option>
                     <option value="triple">Triple chime</option>
+                    <option value="digital">Digital beep</option>
+                    <option value="cosmic">Cosmic tone</option>
+                    <option value="gentle">Gentle rise</option>
                   </select>
                 </label>
                 <label>
@@ -375,6 +663,9 @@
                     <option value="triple">Triple chime</option>
                     <option value="bell">Strong bell</option>
                     <option value="pulse">Soft pulse</option>
+                    <option value="digital">Digital beep</option>
+                    <option value="cosmic">Cosmic tone</option>
+                    <option value="gentle">Gentle rise</option>
                   </select>
                 </label>
                 <label>
@@ -386,8 +677,25 @@
                   <span>Mute audio</span>
                 </label>
               </div>
+              <!-- Ambient sound controls -->
+              <div class="ambient-section">
+                <p class="field-label">Ambient sound</p>
+                <div class="ambient-grid">
+                  <button type="button" class="ambient-btn" data-ambient="off" aria-pressed="true">Off</button>
+                  <button type="button" class="ambient-btn" data-ambient="rain">Rain</button>
+                  <button type="button" class="ambient-btn" data-ambient="space">Space</button>
+                  <button type="button" class="ambient-btn" data-ambient="fan">Fan</button>
+                  <button type="button" class="ambient-btn" data-ambient="cafe">Café</button>
+                  <button type="button" class="ambient-btn" data-ambient="forest">Forest</button>
+                </div>
+                <label class="mt-8">
+                  <span>Ambient volume</span>
+                  <input id="ambientVolume" type="range" min="0" max="1" step="0.05" value="0.3" />
+                </label>
+              </div>
             </div>
 
+            <!-- Reset -->
             <div class="setting-group setting-group-danger">
               <div class="setting-group-head">
                 <p class="eyebrow">Reset</p>
@@ -402,19 +710,46 @@
       </main>
     </div>
 
+    <!-- Ring dialog (alarm/timer fired) -->
     <dialog id="ringDialog" class="ring-dialog" data-testid="ring-dialog">
       <div class="ring-content">
+        <div class="ring-icon" id="ringIcon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M24 6a12 12 0 0 1 12 12v7l3 5H9l3-5v-7A12 12 0 0 1 24 6z"/>
+            <path d="M20 38a4 4 0 0 0 8 0"/>
+            <circle cx="24" cy="6" r="2.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
         <p id="ringKind" class="eyebrow">Alarm</p>
         <h2 id="ringTitle">Time is up</h2>
-        <p id="ringDetail">Sound is playing.</p>
+        <p id="ringDetail" class="ring-detail">Sound is playing.</p>
         <div class="ring-actions">
-          <button class="primary" id="stopRing" data-testid="stop-ring">Stop</button>
+          <button class="btn-primary" id="stopRing" data-testid="stop-ring">Stop</button>
           <button id="snoozeRing" data-testid="snooze-ring">Snooze 5 min</button>
         </div>
       </div>
     </dialog>
 
+    <!-- Keyboard shortcuts modal -->
+    <dialog id="shortcutsDialog" class="shortcuts-dialog">
+      <div class="shortcuts-content">
+        <h2>Keyboard Shortcuts</h2>
+        <div class="shortcuts-grid">
+          <kbd>Space</kbd><span>Start / Pause timer or stopwatch</span>
+          <kbd>R</kbd><span>Reset timer or stopwatch</span>
+          <kbd>L</kbd><span>Lap (stopwatch)</span>
+          <kbd>F</kbd><span>Toggle fullscreen</span>
+          <kbd>1–6</kbd><span>Switch tabs</span>
+          <kbd>Esc</kbd><span>Stop ring / close dialog</span>
+          <kbd>?</kbd><span>Show this panel</span>
+          <kbd>← →</kbd><span>Previous / next theme</span>
+        </div>
+        <button class="btn-primary" id="closeShortcuts">Close</button>
+      </div>
+    </dialog>
+
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
     <script src="app.js"></script>
   </body>
 </html>

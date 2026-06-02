@@ -3,6 +3,18 @@ const path = require("node:path");
 
 const APP_NAME = "Such A Good Clock";
 const APP_URL = path.join(__dirname, "..", "index.html");
+const ALLOWED_EXTERNAL_PROTOCOLS = new Set(["http:", "https:", "mailto:"]);
+
+function openExternalUrl(url) {
+  try {
+    const parsed = new URL(url);
+    if (ALLOWED_EXTERNAL_PROTOCOLS.has(parsed.protocol)) {
+      shell.openExternal(url);
+    }
+  } catch {
+    // Ignore malformed navigation attempts from the renderer.
+  }
+}
 
 function createWindow() {
   const window = new BrowserWindow({
@@ -23,14 +35,14 @@ function createWindow() {
   window.loadFile(APP_URL);
 
   window.webContents.setWindowOpenHandler(({ url }) => {
-    if (!url.startsWith("file:")) shell.openExternal(url);
+    if (!url.startsWith("file:")) openExternalUrl(url);
     return { action: "deny" };
   });
 
   window.webContents.on("will-navigate", (event, url) => {
     if (url.startsWith("file:")) return;
     event.preventDefault();
-    shell.openExternal(url);
+    openExternalUrl(url);
   });
 }
 

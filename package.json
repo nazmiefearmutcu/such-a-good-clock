@@ -1,7 +1,7 @@
 {
   "name": "such-a-good-clock",
-  "version": "1.0.1",
-  "description": "A personalized clock app with cinematic themes, custom clock colors, alarms, countdown timers, and Web Audio alerts.",
+  "version": "2.0.0",
+  "description": "Next-gen themed clock: 11 cinematic themes (incl. Trinity/Oppenheimer), analog/flip/digital faces, alarms, timers, stopwatch, world clock, pomodoro, ambient audio. PWA + Electron.",
   "type": "module",
   "main": "desktop/main.cjs",
   "author": {

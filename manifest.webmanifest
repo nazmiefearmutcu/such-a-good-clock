@@ -1,24 +1,13 @@
 {
   "name": "Such A Good Clock",
-  "short_name": "Such A Good Clock",
-  "description": "A personalized clock app with cinematic themes, custom clock colors, alarms, countdown timers, and Web Audio alerts.",
+  "short_name": "SGClock",
+  "description": "11 cinematic themes, analog/flip/digital faces, stopwatch, world clock, pomodoro. PWA + native desktop.",
   "start_url": "./",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#08141f",
+  "background_color": "#050a07",
   "theme_color": "#08141f",
   "icons": [
-    {
-      "src": "icons/such-a-good-clock-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/such-a-good-clock-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "icons/such-a-good-clock-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/such-a-good-clock-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
