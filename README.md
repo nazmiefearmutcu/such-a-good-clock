@@ -6,7 +6,7 @@
 [![Desktop builds](https://img.shields.io/github/actions/workflow/status/nazmiefearmutcu/such-a-good-clock/desktop-build.yml?label=desktop%20builds)](https://github.com/nazmiefearmutcu/such-a-good-clock/actions/workflows/desktop-build.yml)
 [![Stars](https://img.shields.io/github/stars/nazmiefearmutcu/such-a-good-clock?style=flat&logo=github)](https://github.com/nazmiefearmutcu/such-a-good-clock/stargazers)
 
-**A clock you'd actually want fullscreen on a spare monitor.** Six cinematic themes, alarms, countdown timers, custom three-color clock styling, Web Audio alerts. Runs as a browser PWA (offline-capable) or as a native macOS / Windows / Linux desktop app.
+**A clock you'd actually want fullscreen on a spare monitor.** Eleven cinematic themes, alarms, countdown timers, stopwatch, world clock, pomodoro, custom three-color clock styling, Web Audio alerts. Runs as a browser PWA (offline-capable) or as a native macOS / Windows / Linux desktop app.
 
 ## Download
 
@@ -82,13 +82,13 @@ Or browse [all releases](https://github.com/nazmiefearmutcu/such-a-good-clock/re
 #### Alarms
 ![Alarms page with time + label + sound form, quick +1m / +10m / test buttons, and a list of saved daily alarms](docs/screenshots/alarms.png)
 
-Such A Good Clock opens directly into a polished Matrix-inspired clock by default: split layout, live seconds, steady colon, full-volume Web Audio, auto-hiding top tabs, background effects, and CRT scanlines. From there, users can switch between six cinematic themes (above), tune the clock with a three-color palette, save personal greetings, set alarms, and run countdown timers in the browser or as a native desktop app.
+Such A Good Clock opens directly into a polished Matrix-inspired clock by default: split layout, live seconds, steady colon, full-volume Web Audio, auto-hiding top tabs, background effects, and CRT scanlines. From there, users can switch between eleven cinematic themes (Matrix, 2049, Alien, Pinkie, Rainbow, Interstellar, Cyberpunk, Dune, Synthwave, Mandalorian, and Trinity), tune the clock with a three-color palette, save personal greetings, set alarms, run countdown timers and a stopwatch, and track other zones with the world clock — in the browser or as a native desktop app.
 
 ## Features
 
 - Full-width digital clock with local date, timezone, and saved display preferences.
-- Clock, Alarms, Timer, and Settings pages.
-- Six visual themes: Matrix, 2049, Alien, Pinkie, Rainbow, and Interstellar.
+- Clock, Alarms, Timer, Stopwatch, World clock, and Settings pages.
+- Eleven visual themes: Matrix, 2049, Alien, Pinkie, Rainbow, Interstellar, Cyberpunk, Dune, Synthwave, Mandalorian, and Trinity (an Oppenheimer tribute with a slow electron-dream → Trinity-blast → black ambient loop).
 - Theme cards with live previews, cinematic backgrounds, and rotating theme-specific quote lines.
 - Custom three-stop clock color palette with separate top, middle, and bottom color controls.
 - Personal greeting controls with name, time-based greetings, custom motto, or a clean no-greeting mode.
