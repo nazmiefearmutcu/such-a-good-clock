@@ -851,6 +851,7 @@ function bindEvents() {
   el.brandHome.addEventListener("click",e=>{e.preventDefault();switchPage("clock");});
   el.tabs.forEach(t=>t.addEventListener("click",()=>switchPage(t.dataset.tabTarget)));
   el.greetingName.addEventListener("click",cycleQuote);
+  el.greetingName.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();cycleQuote();}});
   window.addEventListener("pointerdown",()=>void ensureAudio(),{once:true});
   window.addEventListener("keydown",()=>void ensureAudio(),{once:true});
   el.unlockAudio.addEventListener("click",async()=>{const ok=await ensureAudio();showToast(ok?"Audio ready.":"Browser blocked audio.");});
@@ -875,10 +876,10 @@ function bindEvents() {
     saveState();
     if(state.pomodoro.enabled){state.pomodoro.phase="work";state.pomodoro.currentSession=0;startPomodoro();}
   });
-  el.pomodoroWork?.addEventListener("input",()=>{state.pomodoro.work=+el.pomodoroWork.value||25;saveState();});
-  el.pomodoroBreak?.addEventListener("input",()=>{state.pomodoro.shortBreak=+el.pomodoroBreak.value||5;saveState();});
-  el.pomodoroLongBreak?.addEventListener("input",()=>{state.pomodoro.longBreak=+el.pomodoroLongBreak.value||15;saveState();});
-  el.pomodoroRounds?.addEventListener("input",()=>{state.pomodoro.rounds=+el.pomodoroRounds.value||4;saveState();});
+  el.pomodoroWork?.addEventListener("input",()=>{state.pomodoro.work=intRange(el.pomodoroWork.value,25,1,120);saveState();});
+  el.pomodoroBreak?.addEventListener("input",()=>{state.pomodoro.shortBreak=intRange(el.pomodoroBreak.value,5,1,60);saveState();});
+  el.pomodoroLongBreak?.addEventListener("input",()=>{state.pomodoro.longBreak=intRange(el.pomodoroLongBreak.value,15,5,120);saveState();});
+  el.pomodoroRounds?.addEventListener("input",()=>{state.pomodoro.rounds=intRange(el.pomodoroRounds.value,4,2,8);saveState();});
   el.startStopwatch?.addEventListener("click",swToggle);
   el.lapStopwatch?.addEventListener("click",()=>{if(sw.running)addLap();});
   el.resetStopwatch?.addEventListener("click",swReset);
