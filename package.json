@@ -1,7 +1,7 @@
 {
   "name": "such-a-good-clock",
   "version": "2.0.0",
-  "description": "Next-gen themed clock: 11 cinematic themes (incl. Trinity/Oppenheimer), analog/flip/digital faces, alarms, timers, stopwatch, world clock, pomodoro, ambient audio. PWA + Electron.",
+  "description": "Next-gen themed fullscreen clock: 11 cinematic themes, analog/flip/digital faces, alarms, countdown timer, pomodoro, stopwatch, world clock, ambient audio. PWA + native macOS/Windows/Linux desktop.",
   "type": "module",
   "main": "desktop/main.cjs",
   "author": {

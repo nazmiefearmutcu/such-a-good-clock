@@ -19,10 +19,10 @@ external contributions is small but meaningful changes are welcome.
 3. Stack stays: vanilla JS / CSS / HTML — no frameworks. Please don't add a
    build step or framework dependency.
 4. New themes: extend the theme registry in `app.js` and add a card preview.
-5. Tests: there is no formal test suite yet. Please verify your change in:
-   - Chrome (latest) at fullscreen
-   - Mobile Safari (PWA install path)
-   - The Electron wrapper (`npm run electron`)
+5. Run `npm run test:e2e` before opening a PR. The smoke suite covers the
+   fullscreen clock render, offline PWA shell, alarm sound path, and timer sound
+   path. Also verify the Electron wrapper with `npm run desktop:run` when the
+   change touches desktop packaging.
 6. Open a PR with a screenshot of the change and a one-line description.
 
 ## Native desktop builds
