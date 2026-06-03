@@ -59,12 +59,32 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: such-a-good-clock-${{ matrix.name }}
-          path: dist-native/**
+          path: |
+            dist-native/*.dmg
+            dist-native/*.zip
+            dist-native/*.exe
+            dist-native/*.AppImage
+            dist-native/*.deb
+            dist-native/*.tar.gz
+            dist-native/latest*.yml
+          if-no-files-found: ignore
 
       - name: Attach desktop artifact to release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: dist-native/**
+          # Only the distributable installers/archives at the dist-native root —
+          # NOT the unpacked app dirs (mac-arm64/, win-unpacked/, linux-unpacked/),
+          # which would flood the release with raw Electron files and trip the
+          # GitHub secondary upload rate limit.
+          files: |
+            dist-native/*.dmg
+            dist-native/*.zip
+            dist-native/*.exe
+            dist-native/*.AppImage
+            dist-native/*.deb
+            dist-native/*.tar.gz
+            dist-native/*.blockmap
+            dist-native/latest*.yml
           fail_on_unmatched_files: false
           generate_release_notes: false
