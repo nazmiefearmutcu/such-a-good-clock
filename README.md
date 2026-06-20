@@ -131,9 +131,9 @@ Such A Good Clock opens directly into a polished Matrix-inspired clock by defaul
 - Six Web Audio alert sounds (Strong bell, Soft pulse, Triple chime, Digital beep, Cosmic tone, Gentle rise) with volume, mute, and per-alarm/per-timer defaults.
 - **Ambient soundscapes**: Rain, Space, Fan, Café, or Forest, with an independent ambient volume.
 - **Keyboard shortcuts** and a one-tap fullscreen toggle.
-- localStorage persistence for alarms, world clocks, Pomodoro config, and all settings.
+-localStorage persistence for alarms, world clocks, Pomodoro config, and all settings.
 - Installable app shortcut support through a web app manifest and service worker.
-- Static GitHub Pages-ready deployment: no build step required.
+- Modern modular ES6 architecture compiled and bundled with **Vite** for optimum performance.
 
 ## Keyboard shortcuts
 
@@ -186,14 +186,19 @@ Each build writes installers or archives to `dist-native/`. The GitHub Actions w
 
 ## Run
 
+Run the local development server:
+
 ```bash
-python3 -m http.server 4173
+npm run dev
 ```
 
-Then open:
+Then open the output address (usually `http://localhost:5173`).
 
-```text
-http://127.0.0.1:4173
+To build the static production files and preview them:
+
+```bash
+npm run build
+npm run serve
 ```
 
 ## Test
@@ -203,6 +208,9 @@ npm install
 npm run test:e2e
 ```
 
-The automated end-to-end smoke boots the app, verifies the live digital clock renders and ticks, checks corrupt-storage recovery, validates the PWA manifest and offline service-worker load, and confirms an alarm and a timer both fire Web Audio events — writing a screenshot to `test-results/such-a-good-clock-e2e.png`.
+The automated end-to-end smoke test builds the project using Vite, boots the app, verifies the live digital clock renders and ticks, checks corrupt-storage recovery, validates the PWA manifest and offline service-worker load, and confirms an alarm and a timer both fire Web Audio events. 
+
+The test scenarios are modularized into independent test modules under `scripts/tests/` and screenshots are saved to `dist/test-results/such-a-good-clock-e2e.png`.
 
 Current manual and automated coverage is tracked in `TEST_PLAN.md`.
+
