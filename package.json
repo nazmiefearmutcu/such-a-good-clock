@@ -1,6 +1,6 @@
 {
   "name": "such-a-good-clock",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Next-gen themed fullscreen clock: 11 cinematic themes, analog/flip/digital faces, alarms, countdown timer, pomodoro, stopwatch, world clock, ambient audio. PWA + native macOS/Windows/Linux desktop.",
   "type": "module",
   "main": "desktop/main.cjs",
