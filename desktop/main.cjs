@@ -2,7 +2,7 @@ const { app, BrowserWindow, Menu, shell } = require("electron");
 const path = require("node:path");
 
 const APP_NAME = "Such A Good Clock";
-const APP_URL = path.join(__dirname, "..", "index.html");
+const APP_URL = path.join(__dirname, "..", "dist", "index.html");
 const ALLOWED_EXTERNAL_PROTOCOLS = new Set(["http:", "https:", "mailto:"]);
 
 function openExternalUrl(url) {

@@ -6,3 +6,4 @@ playwright-report/
 *.log
 dist-native/
 videos/
+dist/
