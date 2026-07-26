@@ -11,11 +11,11 @@
 ## Download
 
 <p align="left">
-  <a href="https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-2.0.0-arm64.dmg">
+  <a href="https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-2.0.1-arm64.dmg">
     <img alt="Download for macOS (Apple Silicon, .dmg)" src="https://img.shields.io/badge/macOS_Apple_Silicon-Download_.dmg-1d1d1f?logo=apple&logoColor=white&style=for-the-badge" />
   </a>
   &nbsp;
-  <a href="https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock.Setup.2.0.0.exe">
+  <a href="https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock.Setup.2.0.1.exe">
     <img alt="Download for Windows (.exe installer)" src="https://img.shields.io/badge/Windows-Download_.exe-0078d6?logo=windows&logoColor=white&style=for-the-badge" />
   </a>
   &nbsp;
@@ -35,11 +35,11 @@ launches behave like any other app.
 
 | Platform | File |
 | --- | --- |
-| Linux AppImage | [`Such.A.Good.Clock-2.0.0.AppImage`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-2.0.0.AppImage) |
-| Linux Debian/Ubuntu | [`such-a-good-clock_2.0.0_amd64.deb`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/such-a-good-clock_2.0.0_amd64.deb) |
-| Linux tarball | [`such-a-good-clock-2.0.0.tar.gz`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/such-a-good-clock-2.0.0.tar.gz) |
-| Apple Silicon Mac (zip) | [`Such.A.Good.Clock-2.0.0-arm64-mac.zip`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-2.0.0-arm64-mac.zip) |
-| Windows portable | [`Such.A.Good.Clock.2.0.0.exe`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock.2.0.0.exe) |
+| Linux AppImage | [`Such.A.Good.Clock-2.0.1.AppImage`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-2.0.1.AppImage) |
+| Linux Debian/Ubuntu | [`such-a-good-clock_2.0.1_amd64.deb`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/such-a-good-clock_2.0.1_amd64.deb) |
+| Linux tarball | [`such-a-good-clock-2.0.1.tar.gz`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/such-a-good-clock-2.0.1.tar.gz) |
+| Apple Silicon Mac (zip) | [`Such.A.Good.Clock-2.0.1-arm64-mac.zip`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock-2.0.1-arm64-mac.zip) |
+| Windows portable | [`Such.A.Good.Clock.2.0.1.exe`](https://github.com/nazmiefearmutcu/such-a-good-clock/releases/latest/download/Such.A.Good.Clock.2.0.1.exe) |
 
 Or browse [all releases](https://github.com/nazmiefearmutcu/such-a-good-clock/releases).
 
@@ -47,7 +47,7 @@ Or browse [all releases](https://github.com/nazmiefearmutcu/such-a-good-clock/re
 
 ## Preview
 
-> Live demo: **https://nazmiefearmutcu.github.io/such-a-good-clock/**
+> Live demo: **[nazmiefearmutcu.github.io/such-a-good-clock](https://nazmiefearmutcu.github.io/such-a-good-clock/)**
 
 ![Such A Good Clock — Matrix theme, phosphor green CRT digits with a rotating quote](docs/screenshots/theme-matrix.png)
 
