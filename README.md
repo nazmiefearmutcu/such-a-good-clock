@@ -174,4 +174,4 @@ See [TEST_PLAN.md](TEST_PLAN.md), [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURI
 
 [MIT](LICENSE).
 
-Created By Nazmi Efe Armutcu (Aylin)
+Created By Aylin (Nazmi Efe Armutcu)
